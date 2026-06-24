@@ -1,14 +1,11 @@
-# 【全栈之巅】Node.js + Vue.js 全栈开发王者荣耀手机端官网和管理后台
-> 本项目是 [Bilibili 全栈之巅](https://space.bilibili.com/341919508) 视频教程相关源码
-> https://github.com/wxs77577/node-vue-moba
-> 持续更新中... 敬请关注
-
 ## 一、 入门
+
 1. 项目介绍
 1. 工具安装和环境搭建(nodejs,npm,mongodb)
 1. 初始化项目
 
 ## 二、 管理后台
+
 1. 基于Element UI的后台管理基础界面搭建
 
 1. 创建分类
@@ -78,5 +75,6 @@
 1. 迁移本地数据到服务器 (mongodump)
 
 ## 五、进阶
+
 1. 使用免费SSL证书启用HTTPS安全连接
 1. 使用阿里云OSS云存储存放上传文件

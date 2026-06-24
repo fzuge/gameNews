@@ -40,7 +40,8 @@ module.exports = app => {
     const parent = await Category.findOne({
       name: '新闻分类'
     })
-    const cats = await Category.aggregate([
+    
+    /* const cats = await Category.aggregate([
       { $match: { parent: parent._id } },
       {
         $lookup: {
@@ -50,28 +51,31 @@ module.exports = app => {
           as: 'newsList'
         }
       },
-      {
+       {
         $addFields: {
           newsList: { $slice: ['$newsList', 5] }
         }
-      }
-    ])
+      } 
+    ]) */
+
+    const cats = await Article.find();
+
+    //console.log( 123 , cats );
+
     const subCats = cats.map(v => v._id)
     cats.unshift({
       name: '热门',
-      newsList: await Article.find().where({
-        categories: { $in: subCats }
-      }).populate('categories').limit(5).lean()
+      newsList: await Article.find().populate('categories').limit(5).lean()
     })
 
-    cats.map(cat => {
+    /* cats.map(cat => {
       cat.newsList.map(news => {
         news.categoryName = (cat.name === '热门')
           ? news.categories[0].name : cat.name
         return news
       })
       return cat
-    })
+    }) */
     res.send(cats)
 
   })
@@ -101,10 +105,12 @@ module.exports = app => {
 
   // 英雄列表接口
   router.get('/heroes/list', async (req, res) => {
+    
     const parent = await Category.findOne({
       name: '英雄分类'
     })
-    const cats = await Category.aggregate([
+
+    /* const cats = await Category.aggregate([
       { $match: { parent: parent._id } },
       {
         $lookup: {
@@ -114,13 +120,14 @@ module.exports = app => {
           as: 'heroList'
         }
       }
-    ])
+    ]) */
+
+    const cats = await Hero.find();
+
     const subCats = cats.map(v => v._id)
     cats.unshift({
       name: '热门',
-      heroList: await Hero.find().where({
-        categories: { $in: subCats }
-      }).limit(10).lean()
+      heroList: await Hero.find().limit(10).lean()
     })
 
     res.send(cats)
